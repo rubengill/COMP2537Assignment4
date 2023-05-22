@@ -1,9 +1,8 @@
-
-
-
+//Function that defines two variables, first card and second card 
 const setup = () => {
   let firstCard = undefined
   let secondCard = undefined
+  //Click event listener on all elements of class "card", remember "." notation to select classes 
   $(".card").on(("click"), function () {
     $(this).toggleClass("flip");
 
