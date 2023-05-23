@@ -102,11 +102,12 @@ const setup = () => {
   });
 }
 
+
 //Function that starts the timer
 function startTimer() {
-  timerInterval = setInterval(function() {
+  timerInterval = setInterval(function () {
     elapsedTime++;
-    $("#time").text("Time Elapsed: " + elapsedTime);
+    $("#timer").text(elapsedTime);
   }, 1000);
 }
 
@@ -117,6 +118,107 @@ function resetTimer() {
   $("#timer").text(elapsedTime);
 }
 
-startTimer();
-$(document).ready(setup);
 
+$("#start-button").on("click", function () {
+  // Hide start button and show game container
+  $("#start-button").hide();
+  $("#game-container").show();
+
+  // Start the game
+  setup();
+
+  // Start the timer
+  startTimer();
+});
+
+$("#reset-button").on("click", function () {
+  // Reset the game
+  $(".card").removeClass("flip matched");
+  firstCard = undefined;
+  secondCard = undefined;
+  matchedPairs = 0;
+  clickCount = 0;
+  $("#click-counter").text(`Total Clicks: ${clickCount}`);
+  $("#matched-pairs").text(`Matched Pairs: ${matchedPairs}`);
+  $("#remaining-pairs").text(`Remaining Pairs: ${totalPairs - matchedPairs}`);
+
+  // Reset the timer
+  resetTimer();
+
+  // Restart the game
+  setup();
+});
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment #4</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <!-- import jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <button id="start-button" class="btn btn-success">Start</button>
+  <div id="game-container" style="display: none;">
+    <h1 id="timer">0</h1>
+    <button id="reset-button">Reset</button>
+    <div id="counter">
+      <h1 id="click-counter" class="btn btn-danger">Total Clicks: 0</h1>
+    </div>
+
+    <div id="counter">
+      <h1 id="matched-pairs">Matched Pairs: 0</h1>
+    </div>
+
+    <div id="counter">
+      <h1 id="remaining-pairs">Remaining Pairs: 0</h1>
+    </div>
+
+    <div id="game_grid">
+      <div class="card">
+        <img id="img1" class="front_face" src="001.png" alt="">
+        <img class="back_face" src="back.webp" alt="">
+      </div>
+      <div class="card">
+        <img id="img2" class="front_face" src="002.png" alt="">
+        <img class="back_face" src="back.webp" alt="">
+      </div>
+      <div class="card">
+        <img id="img3" class="front_face" src="003.png" alt="">
+        <img class="back_face" src="back.webp" alt="">
+      </div>
+      <div class="card">
+        <img id="img4" class="front_face" src="001.png" alt="">
+        <img class="back_face" src="back.webp" alt="">
+      </div>
+      <div class="card">
+        <img id="img5" class="front_face" src="002.png" alt="">
+        <img class="back_face" src="back.webp" alt="">
+      </div>
+      <div class="card">
+        <img id="img6" class="front_face" src="003.png" alt="">
+        <img class="back_face" src="back.webp" alt="">
+      </div>
+    </div>
+</body><!-- Rest of your game HTML goes here -->
+</div>
+
+
+
+</html>

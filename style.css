@@ -50,7 +50,7 @@ img {
 }
 
 #counter {
-  font-size:large;
+  font-size:medium;
   display: flex;
   justify-content: center;
 }
