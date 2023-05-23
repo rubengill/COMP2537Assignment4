@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 //Counter to keep track of number of clicks, defined outside of the function so it is not reset with every
 // "setup" call
 let clickCount = 0;
