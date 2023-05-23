@@ -2,6 +2,11 @@ body {
   margin: 0px;
 }
 
+/* CSS for game container */
+#game {
+  display: none;
+}
+
 #game_grid {
   border: 2px tomato solid;
   width: 600px;
@@ -53,4 +58,14 @@ img {
   font-size:medium;
   display: flex;
   justify-content: center;
+}
+
+#reset-button {
+  display: block;
+  margin: 0 auto;
+}
+
+#start-button {
+  margin-left: 49%;
+
 }
