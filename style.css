@@ -6,17 +6,25 @@ body {
   border: 2px tomato solid;
   width: 600px;
   height: 400px;
+  /* Centers the grid area */
   margin: auto;
+  /* Makes the grid container a flex container, and it's direct children be come flex items (in this case the cards)*/
   display: flex;
+  /* Instead of trying to fill all the cards on one line, flex-wrap: wrap ensures that if they cannot fit on line, they will begin to fill the next line */
   flex-wrap: wrap;
 }
 
 
 .card {
+  /* sets the width of each card to be 33.3% of the width of its parent container */
   width: 33.3%;
+  /* sets the position of the card elements to be relative to their normal position */
   position: relative;
+  /* sets up a transition effect on the transform property that lasts 1 second */
   transition: transform 1s;
+  /*  sets the perspective for 3D transformations on the card elements. The value represents the distance from the viewer to the object. Lower values create a more pronounced 3D effect */
   perspective: 1000px;
+  /* ensures that 3D transformations are preserved for child elements, necessary for the flipping effect to work correctly, as it allows the front and back faces of the card to exist in 3D space */
   transform-style: preserve-3d;
 }
 
