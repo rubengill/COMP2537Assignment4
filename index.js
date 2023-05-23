@@ -36,12 +36,19 @@ const setup = () => {
         $(`#${firstCard.id}`).parent().addClass("matched");
         $(`#${secondCard.id}`).parent().addClass("matched");
 
-        // Reset the first and second card variables
-        firstCard = undefined;
-        secondCard = undefined;
+        // After a delay of 1 second, check if all cards are matched, and if so, display the "You won" message
+        setTimeout(() => {
+          if ($(".card.matched").length === $(".card").length) {
+            alert("You're a champion!");
+          }
 
-        // Run the setup function again to re-enable clicks on unmatched cards
-        setup();
+          // Reset the first and second card variables
+          firstCard = undefined;
+          secondCard = undefined;
+
+          // Run the setup function again to re-enable clicks on unmatched cards
+          setup();
+        }, 1000);
       } else {
         // If the cards do not match, log "no match" to the console
         console.log("no match");
@@ -64,3 +71,4 @@ const setup = () => {
 }
 
 $(document).ready(setup);
+
