@@ -18,8 +18,10 @@ const setup = () => {
       //If they are the same, log that they match 
       if (firstCard.src == secondCard.src) {
         console.log("match")
+        //Take off event listener from the cards that have been matched
         $(`#${firstCard.id}`).parent().off("click")
         $(`#${secondCard.id}`).parent().off("click")
+        //Reset first and second card
         firstCard = undefined;
         secondCard = undefined;
       } else {
@@ -27,6 +29,7 @@ const setup = () => {
         setTimeout(() => {
           $(`#${firstCard.id}`).parent().toggleClass("flip")
           $(`#${secondCard.id}`).parent().toggleClass("flip")
+          //Reset first and second card
           firstCard = undefined;
           secondCard = undefined;
         }, 1000)
