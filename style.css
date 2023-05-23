@@ -69,3 +69,8 @@ img {
   margin-left: 49%;
 
 }
+
+#difficulty-buttons {
+  display: flex;
+  justify-content: center;
+}
