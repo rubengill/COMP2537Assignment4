@@ -1,40 +1,66 @@
-//Function that defines two variables, first card and second card 
+// Function that defines two variables, first card and second card 
 const setup = () => {
-  let firstCard = undefined
-  let secondCard = undefined
-  //Click event listener on all elements of class "card", remember "." notation to select classes 
-  $(".card").on(("click"), function () {
+  // Declare two variables to store the first and second card
+  let firstCard = undefined;
+  let secondCard = undefined;
+
+  // Add a click event listener to all elements with class "card" that do not have the "matched" class
+  $(".card:not(.matched)").on("click", function () {
+    // If the first card has been clicked and its id matches the id of the currently clicked card, do nothing
     if (firstCard && firstCard.id === $(this).find(".front_face")[0].id) {
       return;
     }
+
+    // Toggle the "flip" class on the clicked card (this will flip the card)
     $(this).toggleClass("flip");
-    //Sets firstCard to the first card the user clicks 
-    if (!firstCard)
-      firstCard = $(this).find(".front_face")[0]
-    else {
-      //if firstCard is defined, set secondCard to the next card the user clicks. 
-      secondCard = $(this).find(".front_face")[0]
+
+    // If the first card hasn't been clicked yet, set firstCard to the clicked card
+    if (!firstCard) {
+      firstCard = $(this).find(".front_face")[0];
+    } else {
+      // If the first card has been clicked, set secondCard to the clicked card
+      secondCard = $(this).find(".front_face")[0];
+
+      // Log the first and second card to the console
       console.log(firstCard, secondCard);
-      //If they are the same, log that they match 
+
+      // Remove the click event handler from all cards when two cards are selected
+      $(".card").off("click");
+
+      // If the first card and the second card match
       if (firstCard.src == secondCard.src) {
-        console.log("match")
-        //Take off event listener from the cards that have been matched
-        $(`#${firstCard.id}`).parent().off("click")
-        $(`#${secondCard.id}`).parent().off("click")
-        //Reset first and second card
+        // Log "match" to the console
+        console.log("match");
+
+        // Add the "matched" class to the matched cards, so they can no longer be clicked
+        $(`#${firstCard.id}`).parent().addClass("matched");
+        $(`#${secondCard.id}`).parent().addClass("matched");
+
+        // Reset the first and second card variables
         firstCard = undefined;
         secondCard = undefined;
+
+        // Run the setup function again to re-enable clicks on unmatched cards
+        setup();
       } else {
-        console.log("no match")
+        // If the cards do not match, log "no match" to the console
+        console.log("no match");
+
+        // After a delay of 1 second, flip the cards back and reset the first and second card variables
         setTimeout(() => {
-          $(`#${firstCard.id}`).parent().toggleClass("flip")
-          $(`#${secondCard.id}`).parent().toggleClass("flip")
-          //Reset first and second card
+          $(`#${firstCard.id}`).parent().toggleClass("flip");
+          $(`#${secondCard.id}`).parent().toggleClass("flip");
+
+          // Reset the first and second card variables
           firstCard = undefined;
           secondCard = undefined;
-        }, 1000)
+
+          // Run the setup function again to re-enable clicks on all cards
+          setup();
+        }, 1000);
       }
     }
   });
 }
-$(document).ready(setup)
+
+$(document).ready(setup);
