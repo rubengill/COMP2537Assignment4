@@ -7,6 +7,19 @@ let totalPairs = 0;
 //Variables to keep track of the time elapsed
 let timerInterval = null;
 let elapsedTime = 0;
+//Variables to hold first and second cards
+let firstCard;
+let secondCard;
+
+//Function that starts the timer
+function startTimer() {
+  timerInterval = setInterval(function () {
+    elapsedTime++;
+    $("#time").text("Time Elapsed: " + elapsedTime);
+  }, 1000);
+}
+
+startTimer();
 
 //Calculate totalPairs after the DOM has fully loaded to avoid any errors
 $(document).ready(function () {
@@ -20,8 +33,8 @@ let matchedPairs = 0;
 // Function that defines two variables, first card and second card 
 const setup = () => {
   // Declare two variables to store the first and second card
-  let firstCard = undefined;
-  let secondCard = undefined;
+  firstCard = undefined;
+  secondCard = undefined;
 
   // Add a click event listener to all elements with class "card" that do not have the "matched" class
   $(".card:not(.matched)").on("click", function () {
@@ -100,15 +113,6 @@ const setup = () => {
       }
     }
   });
-}
-
-//Function that starts the timer
-function startTimer() {
-  timerInterval = setInterval(function() {
-    elapsedTime++;
-    $("#time").text("Time Elapsed: " + elapsedTime);
-  }, 1000);
-}
 
 //Function that resets the timer 
 function resetTimer() {
@@ -117,6 +121,30 @@ function resetTimer() {
   $("#timer").text(elapsedTime);
 }
 
-startTimer();
+$("#reset-button").on("click", function () {
+    // Turn off click events on the cards
+    $(".card").off("click");
+
+    // Reset the game
+    $(".card").removeClass("flip matched");
+    firstCard = undefined;
+    secondCard = undefined;
+    matchedPairs = 0;
+    clickCount = 0;
+    $("#click-counter").text(`Total Clicks: ${clickCount}`);
+    $("#matched-pairs").text(`Matched Pairs: ${matchedPairs}`);
+    $("#remaining-pairs").text(`Remaining Pairs: ${totalPairs - matchedPairs}`);
+
+    // Reset the timer
+    resetTimer();
+
+    // Restart the game
+    setup();
+
+    // Restart the timer
+    startTimer();
+  });
+}
+
 $(document).ready(setup);
 
