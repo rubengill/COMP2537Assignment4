@@ -245,7 +245,19 @@ $(document).ready(function () {
     $(".back_face").addClass("grey");
   });
 
-  $(document).ready(setup);
+  //Show cards for 1.5 seconds if button is clicked
+  $("#show-cards-button").on("click", function() {
+    // Flip all cards
+    $(".card").addClass("flip");
+  
+    // After 1.5 seconds, flip all cards back
+    setTimeout(function() {
+        $(".card").removeClass("flip");
+    }, 1500);
+  });
 
+  $(document).ready(setup);
 });
+
+
 

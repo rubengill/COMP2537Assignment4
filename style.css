@@ -97,3 +97,8 @@ img {
 .back_face.grey {
   background-color: grey;
 }
+
+#show-cards-button {
+  display: block;
+  margin: 0 auto;
+}
