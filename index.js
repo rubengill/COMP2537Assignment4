@@ -247,14 +247,14 @@ $(document).ready(function () {
 
   //Show cards for 1.5 seconds if button is clicked
   $("#show-cards-button").on("click", function() {
-    // Flip all cards
-    $(".card").addClass("flip");
-  
-    // After 1.5 seconds, flip all cards back
+    // Temporarily flip all cards that are not already flipped
+    $(".card:not(.flip)").addClass("temp-flip flip");
+
+    // After 2 seconds, flip all temporarily flipped cards back
     setTimeout(function() {
-        $(".card").removeClass("flip");
+        $(".card.temp-flip").removeClass("temp-flip flip");
     }, 1500);
-  });
+});
 
   $(document).ready(setup);
 });
