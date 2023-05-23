@@ -30,9 +30,6 @@ body {
   height: 800px;
 }
 
-
-
-
 .card {
   /* sets the width of each card to be 33.3% of the width of its parent container */
   width: 198px;
@@ -46,8 +43,6 @@ body {
   /* ensures that 3D transformations are preserved for child elements, necessary for the flipping effect to work correctly, as it allows the front and back faces of the card to exist in 3D space */
   transform-style: preserve-3d;
 }
-
-
 
 img {
   width: 100%
@@ -88,4 +83,17 @@ img {
 #difficulty-buttons {
   display: flex;
   justify-content: center;
+}
+
+#color-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.back_face.green {
+  background-color: green;
+}
+
+.back_face.grey {
+  background-color: grey;
 }

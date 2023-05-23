@@ -23,7 +23,7 @@ $(document).ready(function () {
   $("#novice-button, #intermediate-button, #advanced-button").on("click", function () {
     // Get the number of pairs from the button's data attribute
     difficultyPairs = $(this).data("pairs");
-    
+
     $("#game_grid").removeClass();
     $("#game_grid").addClass($(this).attr("id"));
     console.log("Pairs: " + difficultyPairs);
@@ -234,6 +234,18 @@ $(document).ready(function () {
     });
   }
 
+  //Change the backgroun color of the cards
+  $("#green-button").on("click", function () {
+    $(".back_face").removeClass("grey");
+    $(".back_face").addClass("green");
+  });
+
+  $("#grey-button").on("click", function () {
+    $(".back_face").removeClass("green");
+    $(".back_face").addClass("grey");
+  });
+
   $(document).ready(setup);
 
 });
+
