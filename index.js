@@ -1,3 +1,19 @@
+//Counter to keep track of number of clicks, defined outside of the function so it is not reset with every
+// "setup" call
+let clickCount = 0;
+//Delcare totaPairs to keep track of total pairs in the current game, outside of any function to ensure it is 
+//incremented properly 
+let totalPairs = 0;
+
+//Calculate totalPairs after the DOM has fully loaded to avoid any errors
+$(document).ready(function () {
+  totalPairs = $(".card").length / 2;
+  console.log("Cards: " + totalPairs);
+});
+
+//Declare the number of pairs currently matched
+let matchedPairs = 0;
+
 // Function that defines two variables, first card and second card 
 const setup = () => {
   // Declare two variables to store the first and second card
@@ -6,6 +22,12 @@ const setup = () => {
 
   // Add a click event listener to all elements with class "card" that do not have the "matched" class
   $(".card:not(.matched)").on("click", function () {
+    // If the card is not flipped, increment the click count
+    if (!$(this).hasClass("flip")) {
+      clickCount++;
+      $("#click-counter").text(`Total Clicks: ${clickCount}`);
+    }
+
     // If the first card has been clicked and its id matches the id of the currently clicked card, do nothing
     if (firstCard && firstCard.id === $(this).find(".front_face")[0].id) {
       return;
@@ -31,6 +53,13 @@ const setup = () => {
       if (firstCard.src == secondCard.src) {
         // Log "match" to the console
         console.log("match");
+
+        // Increment the matched pairs count
+        matchedPairs++;
+
+        // Display matched pairs and remaining pairs
+        $("#matched-pairs").text(`Matched Pairs: ${matchedPairs}`);
+        $("#remaining-pairs").text(`Remaining Pairs: ${totalPairs - matchedPairs}`);
 
         // Add the "matched" class to the matched cards, so they can no longer be clicked
         $(`#${firstCard.id}`).parent().addClass("matched");
