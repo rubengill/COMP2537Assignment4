@@ -19,10 +19,24 @@ body {
   flex-wrap: wrap;
 }
 
+#game_grid.intermediate-button {
+  width: 800px;
+  height: 605px;
+  
+}
+
+#game_grid.advanced-button {
+  width: 1195px;
+  height: 800px;
+}
+
+
+
 
 .card {
   /* sets the width of each card to be 33.3% of the width of its parent container */
-  width: 33.3%;
+  width: 198px;
+  height: 198px;
   /* sets the position of the card elements to be relative to their normal position */
   position: relative;
   /* sets up a transition effect on the transform property that lasts 1 second */
@@ -32,6 +46,7 @@ body {
   /* ensures that 3D transformations are preserved for child elements, necessary for the flipping effect to work correctly, as it allows the front and back faces of the card to exist in 3D space */
   transform-style: preserve-3d;
 }
+
 
 
 img {

@@ -12,6 +12,23 @@ let elapsedTime = 0;
 //Variables to hold first and second cards
 let firstCard;
 let secondCard;
+// Declare difficulty pairs, which contains the number of pairs for each difficulty
+let difficultyPairs;
+
+//Get the user to click on the difficulty they want, and define the pairs needed for that difficulty
+$(document).ready(function () {
+  // Default to novice difficulty
+  difficultyPairs = 3;
+
+  $("#novice-button, #intermediate-button, #advanced-button").on("click", function () {
+    // Get the number of pairs from the button's data attribute
+    difficultyPairs = $(this).data("pairs");
+    
+    $("#game_grid").removeClass();
+    $("#game_grid").addClass($(this).attr("id"));
+    console.log("Pairs: " + difficultyPairs);
+  });
+});
 
 //Function that starts the timer
 function startTimer() {
@@ -57,8 +74,8 @@ $(document).ready(function () {
         let allPokemon = data.results;
         let randomPokemon = [];
 
-        // Pick 3 random Pokemon
-        for (let i = 0; i < 3; i++) {
+        // Pick random Pokemon based on the selected difficulty
+        for (let i = 0; i < difficultyPairs; i++) {
           let randomIndex = Math.floor(Math.random() * allPokemon.length);
           randomPokemon.push(allPokemon[randomIndex]);
         }
